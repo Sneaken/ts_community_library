@@ -14,7 +14,7 @@
     "member-access": false, // 需要类成员的显式可见性声明。
     "no-shadowed-variable": false, // 不允许隐藏变量声明。
     "no-trailing-whitespace": false, // 不允许在行尾添加尾随空格。
-    "semicolon": false, // 是否分号结尾
+    "semicolon": true, // 是否分号结尾
     "trailing-comma": false, // 是否强象添加逗号
     "eofline": false, // 是否末尾另起一行
     "prefer-conditional-expression": false, // for (... in ...)语句必须用if语句过滤
