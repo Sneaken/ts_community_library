@@ -8,8 +8,9 @@ let loading: ElLoadingComponent;
 function startLoading() {
   loading = Loading.service({
     lock: true,
-    text: '拼命加载中...',
-    background: 'rgba(0,0,0,0,7)'
+    text: 'Loading...',
+    spinner: 'el-icon-loading',
+    background: 'rgba(0,0,0,0.7)'
   });
 }
 
@@ -42,24 +43,24 @@ axios.interceptors.response.use(
   (error: any) => {
     endLoading();
     Message.error(error.response);
-    // // 获取错误状态码
-    // const { status } = error.response
-    // if (status === 401) {
-    //   if (router.currentRoute.path) {
-    //     Message.warning('权限不足，请先登录！')
-    //     localStorage.removeItem('eleToken')
-    //     router.replace({
-    //       name: 'userLogin',
-    //       query: { redirect: router.currentRoute.fullPath }
-    //     })
-    //   } else {
-    //     Message.error('token失效，请重新登录！')
-    //     // 清除token
-    //     localStorage.removeItem('eleToken')
-    //     // 跳转到登录页面
-    //     router.push('/user/login')
-    //   }
-    // }
+    // 获取错误状态码
+    const { status } = error.response;
+    if (status === 401) {
+      if (router.currentRoute.path) {
+        Message.warning('登录信息过期，请重新登录！');
+        localStorage.removeItem('eleToken');
+        // router.replace({
+        //   name: 'userLogin',
+        //   query: { redirect: router.currentRoute.fullPath }
+        // });
+      } else {
+        Message.error('token失效，请重新登录！');
+        // 清除token
+        localStorage.removeItem('eleToken');
+        // 跳转到登录页面
+        router.push('/user/login');
+      }
+    }
     return Promise.reject(error);
   }
 );

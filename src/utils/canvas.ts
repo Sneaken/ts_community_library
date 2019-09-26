@@ -43,7 +43,7 @@ export default function draw(id: string): any {
   // 添加粒子
   // x，y为粒子坐标，xa, ya为粒子xy轴加速度，max为连线的最大距离
   const dots: any[] = [];
-  for (let i = 0; i < 500; i++) {
+  for (let i = 0; i < 400; i++) {
     const x = Math.random() * canvas.width;
     const y = Math.random() * canvas.height;
     const xa = Math.random() * 2 - 1;
