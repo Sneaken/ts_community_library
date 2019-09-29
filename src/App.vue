@@ -26,6 +26,8 @@ export default class App extends Vue {
           type: 'warning',
           message: '登录信息失效，请重新登录'
         });
+        localStorage.removeItem('eleToken');
+        this.$router.push('/login');
       }
     }
   }

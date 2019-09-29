@@ -58,7 +58,7 @@ axios.interceptors.response.use(
         // 清除token
         localStorage.removeItem('eleToken');
         // 跳转到登录页面
-        router.push('/user/login');
+        router.push('/login');
       }
     }
     return Promise.reject(error);

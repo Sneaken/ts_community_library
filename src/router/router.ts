@@ -39,7 +39,13 @@ export default [
     path: '/login',
     name: 'login',
     component: () => import('@/views/User/Login.vue'),
-    meta: { title: 'login' }
+    meta: { title: '登录' }
+  },
+  {
+    path: '/register',
+    name: 'register',
+    component: () => import('@/views/User/Register.vue'),
+    meta: { title: '注册' }
   },
   {
     path: '/index',

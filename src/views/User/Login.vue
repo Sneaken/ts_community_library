@@ -115,17 +115,28 @@ export default class Login extends Vue {
             } else {
               await this.$router.push('/index');
             }
-          } else if (result.status === 201) {
-            this.$message({
-              message: result.message,
-              type: 'error'
-            });
-          } else if (result.status === 202) {
+          } else {
             this.$message({
               message: result.message,
               type: 'error'
             });
           }
+          // else if (result.status === 201) {
+          //     this.$message({
+          //         message: result.message,
+          //         type: 'error'
+          //     });
+          // } else if (result.status === 202) {
+          //     this.$message({
+          //         message: result.message,
+          //         type: 'error'
+          //     });
+          // } else if (result.status === 203) {
+          //     this.$message({
+          //         message: result.message,
+          //         type: 'error'
+          //     });
+          // }
         } catch (e) {
           console.log(e);
         }
