@@ -58,6 +58,7 @@ import draw from '@/utils/canvas';
 import { LOGIN_URL, VERIFY } from '@/config';
 import jwt_decode from 'jwt-decode';
 import { isEmpty } from '@/utils/common';
+import { ResultInterface } from '@/config/common.interface';
 @Component
 export default class Login extends Vue {
   loading: boolean = false;
@@ -79,11 +80,7 @@ export default class Login extends Vue {
       if (valid) {
         try {
           this.loading = true;
-          const result: {
-            status: number;
-            message: string;
-            data: string;
-          } = await this.$axios.post(LOGIN_URL, {
+          const result: ResultInterface = await this.$axios.post(LOGIN_URL, {
             username: this.loginForm.username,
             password: this.loginForm.password,
             verificationCode: this.loginForm.verificationCode
@@ -106,12 +103,11 @@ export default class Login extends Vue {
               type: 'success'
             });
             // 跳转地址
-            const redirect: string | (string | null)[] = this.$route.query
-              .redirect;
+            const redirect = this.$route.query.redirect;
 
             // 临时登录
-            if (typeof redirect === 'undefined') {
-              await this.$router.push(redirect);
+            if (typeof redirect !== 'undefined') {
+              await this.$router.push(redirect as string);
             } else {
               await this.$router.push('/index');
             }

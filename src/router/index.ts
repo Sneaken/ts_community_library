@@ -11,27 +11,28 @@ const router = new Router({
 });
 
 // 登陆页面路由 name
-const LOGIN_PAGE_NAME = 'login';
+const LOGIN_PAGE_NAME: string = 'login';
+const REGISTER_PAGE_NAME: string = 'register';
+const INDEX_PAGE_NAME: string = 'index';
+const allowThroughList: string[] = [LOGIN_PAGE_NAME, REGISTER_PAGE_NAME];
 
 // 跳转之前
 router.beforeEach((to, from, next) => {
   const isLogin = !!localStorage.eleToken;
-  if (!isLogin && to.name !== LOGIN_PAGE_NAME) {
-    // 未登录且要跳转的页面不是登录页
-    next({
-      name: LOGIN_PAGE_NAME // 跳转到登录页
-    });
-  } else if (!isLogin && to.name === LOGIN_PAGE_NAME) {
-    // 未登陆且要跳转的页面是登录页
-    next(); // 跳转
-  } else if (isLogin && to.name === LOGIN_PAGE_NAME) {
+  if (isLogin) {
     // 已登录且要跳转的页面是登录页
-    next({
-      name: 'index' // 跳转到 index 页
-    });
+    if (to.name === LOGIN_PAGE_NAME) {
+      next({
+        name: INDEX_PAGE_NAME // 跳转到 index 页
+      });
+    } else {
+      // 其他页
+      next();
+    }
   } else {
-    if (isLogin) {
-      next(); // 跳转
+    // 未登录且要跳转的页面是允许跳转的
+    if (allowThroughList.includes(to.name as string)) {
+      next();
     } else {
       next({
         name: LOGIN_PAGE_NAME
