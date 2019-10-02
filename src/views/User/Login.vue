@@ -46,6 +46,7 @@
             >登录</el-button
           >
           <el-button @click="resetForm('loginForm')">重置</el-button>
+          <el-button @click="$router.push('register')">注册</el-button>
         </el-form-item>
       </el-form>
     </div>

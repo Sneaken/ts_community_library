@@ -40,12 +40,13 @@ axios.interceptors.response.use(
     endLoading();
     return response.data;
   },
-  (error: any) => {
+  async (error: any) => {
     endLoading();
     Message.error(error.response);
     // 获取错误状态码
     const { status } = error.response;
     if (status === 401) {
+      console.log(router.currentRoute.path);
       if (router.currentRoute.path) {
         Message.warning('登录信息过期，请重新登录！');
         localStorage.removeItem('eleToken');
@@ -58,7 +59,7 @@ axios.interceptors.response.use(
         // 清除token
         localStorage.removeItem('eleToken');
         // 跳转到登录页面
-        router.push('/login');
+        await router.push('/login');
       }
     }
     return Promise.reject(error);
