@@ -4,7 +4,7 @@
       <el-col :span="4"><span class="title">星星读书</span></el-col>
       <el-col :span="19">
         <el-menu
-          :default-active="''"
+          :default-active="'1'"
           mode="horizontal"
           @select="handleSelect"
           background-color="#3498db"
@@ -29,7 +29,7 @@ import SelfSelect from '@/components/SelfSelect.vue';
   }
 })
 export default class selfHeader extends Vue {
-  showSelect: boolean = false;
+  showSelect: boolean = true;
 
   handleSelect(key: string, keyPath: string[]) {
     if (key === '1') {
@@ -41,7 +41,6 @@ export default class selfHeader extends Vue {
 
 <style lang="scss" scoped>
 .header {
-  height: 60px;
   width: 50%;
   margin: 0 auto;
 }

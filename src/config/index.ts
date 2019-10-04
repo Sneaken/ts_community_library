@@ -7,4 +7,6 @@ export const REGISTER: string = '/api/user/register';
 
 export const findSimple: string = '/api/book/findSimple';
 
-export const findHomeBook: string = '/api/book/findHomeBook';
+export const getHomeBook: string = '/api/book/getHomeBook';
+
+export const getLeaderBoard: string = '/api/book/getLeaderBoard';

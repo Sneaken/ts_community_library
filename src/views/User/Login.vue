@@ -89,10 +89,10 @@ export default class Login extends Vue {
 
           this.loading = false;
           if (result.status === 200) {
-            localStorage.setItem('eleToken', result.data);
+            localStorage.setItem('eleToken', result.data as string);
             //解析token
-            const decoded = jwt_decode(result.data);
-            console.log(decoded);
+            const decoded = jwt_decode(result.data as string);
+            // console.log(decoded);
 
             //token存储到vuex
             await this.$store.dispatch('setAuthenticated', !isEmpty(decoded));

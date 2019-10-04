@@ -46,10 +46,10 @@ axios.interceptors.response.use(
     // 获取错误状态码
     const { status } = error.response;
     if (status === 401) {
-      console.log(router.currentRoute.path);
       if (router.currentRoute.path) {
         Message.warning('登录信息过期，请重新登录！');
         localStorage.removeItem('eleToken');
+        await router.push('/login');
         // router.replace({
         //   name: 'userLogin',
         //   query: { redirect: router.currentRoute.fullPath }

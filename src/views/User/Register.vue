@@ -96,9 +96,9 @@ export default class Register extends Vue {
     }
     //区位码校验
     //出生年月日校验   前正则限制起始年份为1900;
-    const year = value.substr(6, 4), //身份证年
-      month = value.substr(10, 2), //身份证月
-      date = value.substr(12, 2), //身份证日
+    const year = Number.parseInt(value.substr(6, 4)), //身份证年
+      month = Number.parseInt(value.substr(10, 2)), //身份证月
+      date = Number.parseInt(value.substr(12, 2)), //身份证日
       time = Date.parse(month + '-' + date + '-' + year), //身份证日期时间戳date
       now_time = Date.parse(new Date().toString()), //当前时间戳
       dates = new Date(year, month, 0).getDate(); //身份证当月天数
