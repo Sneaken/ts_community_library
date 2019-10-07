@@ -52,5 +52,11 @@ export default [
     name: 'index',
     component: () => import('@/views/Index.vue'),
     meta: { title: '首页' }
+  },
+  {
+    path: '/bookInfo/:_id',
+    name: 'bookInfo',
+    component: () => import('@/views/BookInfo.vue'),
+    meta: { title: '图书详情' }
   }
 ];

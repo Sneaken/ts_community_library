@@ -54,6 +54,7 @@ import draw from '@/utils/canvas';
 import { REGISTER } from '@/config';
 import { ResultInterface } from '@/config/common.interface';
 import logger from 'vuex/dist/logger';
+import { ElForm } from 'element-ui/types/form';
 
 @Component
 export default class Register extends Vue {
@@ -210,7 +211,7 @@ export default class Register extends Vue {
   }
 
   submitForm(formName: string) {
-    (this.$refs[formName] as any).validate(async (valid: boolean) => {
+    (this.$refs[formName] as ElForm).validate(async (valid: boolean) => {
       if (valid) {
         const {
           username,

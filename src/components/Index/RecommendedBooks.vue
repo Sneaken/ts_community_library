@@ -3,7 +3,11 @@
     <h3>推荐图书</h3>
     <el-divider></el-divider>
     <div class="book-list">
-      <el-carousel indicator-position="outside" height="480px">
+      <el-carousel
+        indicator-position="outside"
+        height="485px"
+        :autoplay="false"
+      >
         <el-carousel-item v-for="itemList in bookList">
           <div>
             <ul>
@@ -14,14 +18,22 @@
                     <p>{{ item.author.join(',') }}</p>
                     <p>{{ item.summary.substring(0, 250) }}</p>
                   </div>
-                  <div>
-                    <el-image
-                      :src="imageChange(item.images.small)"
-                      :alt="item.title"
-                    ></el-image>
-                    <p>{{ item.title }}</p>
-                    <p>{{ item.author.join(',') }}</p>
-                  </div>
+                  <router-link
+                    :to="{
+                      name: 'bookInfo',
+                      params: { _id: item._id }
+                    }"
+                    class="link"
+                  >
+                    <div>
+                      <el-image
+                        :src="imageChange(item.images.small)"
+                        :alt="item.title"
+                      ></el-image>
+                      <p>{{ item.title }}</p>
+                      <p>{{ item.author.join(',') }}</p>
+                    </div>
+                  </router-link>
                 </el-tooltip>
               </li>
             </ul>
@@ -35,7 +47,7 @@
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
 import BScroll from 'better-scroll';
-import { getHomeBook } from '@/config';
+import { GET_HOME_BOOK } from '@/config';
 import { ResultInterface } from '@/config/common.interface';
 @Component
 export default class recommendedBooks extends Vue {
@@ -51,7 +63,7 @@ export default class recommendedBooks extends Vue {
   }
 
   async getBookList() {
-    const result: ResultInterface = await this.$axios.get(getHomeBook);
+    const result: ResultInterface = await this.$axios.get(GET_HOME_BOOK);
     let temp = [];
     if (result.status === 200) {
       for (let i = 0; i < (result.data as string[]).length; i++) {
@@ -69,7 +81,7 @@ export default class recommendedBooks extends Vue {
 
 <style lang="scss" scoped>
 .recommend-book {
-  width: 50%;
+  width: 950px;
   margin: 0 auto;
 }
 .book-list {
@@ -87,6 +99,7 @@ export default class recommendedBooks extends Vue {
         p {
           margin: 5px 0;
           width: 115px;
+          line-height: 1.3;
           white-space: nowrap;
           overflow: hidden;
           text-overflow: ellipsis;
@@ -98,6 +111,10 @@ export default class recommendedBooks extends Vue {
       }
     }
   }
+}
+.link {
+  text-decoration: none;
+  color: black;
 }
 </style>
 

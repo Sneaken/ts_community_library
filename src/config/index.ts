@@ -5,8 +5,10 @@ export const VERIFY: string = '/api/verify';
 
 export const REGISTER: string = '/api/user/register';
 
-export const findSimple: string = '/api/book/findSimple';
+export const FIND_SIMPLE: string = '/api/book/findSimple';
 
-export const getHomeBook: string = '/api/book/getHomeBook';
+export const GET_HOME_BOOK: string = '/api/book/getHomeBook';
 
-export const getLeaderBoard: string = '/api/book/getLeaderBoard';
+export const GET_LEADER_BOARD: string = '/api/book/getLeaderBoard';
+
+export const GET_INFO: string = '/api/book/getInfo';

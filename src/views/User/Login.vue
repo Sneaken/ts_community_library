@@ -60,6 +60,7 @@ import { LOGIN_URL, VERIFY } from '@/config';
 import jwt_decode from 'jwt-decode';
 import { isEmpty } from '@/utils/common';
 import { ResultInterface } from '@/config/common.interface';
+import { ElForm } from 'element-ui/types/form';
 @Component
 export default class Login extends Vue {
   loading: boolean = false;
@@ -77,7 +78,7 @@ export default class Login extends Vue {
   }
 
   submit(form: string) {
-    (this.$refs[form] as any).validate(async (valid: Boolean) => {
+    (this.$refs[form] as ElForm).validate(async (valid: any) => {
       if (valid) {
         try {
           this.loading = true;
@@ -118,22 +119,6 @@ export default class Login extends Vue {
               type: 'error'
             });
           }
-          // else if (result.status === 201) {
-          //     this.$message({
-          //         message: result.message,
-          //         type: 'error'
-          //     });
-          // } else if (result.status === 202) {
-          //     this.$message({
-          //         message: result.message,
-          //         type: 'error'
-          //     });
-          // } else if (result.status === 203) {
-          //     this.$message({
-          //         message: result.message,
-          //         type: 'error'
-          //     });
-          // }
         } catch (e) {
           console.log(e);
         }

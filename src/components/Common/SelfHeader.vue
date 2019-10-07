@@ -1,7 +1,11 @@
 <template>
   <div class="header">
     <el-row :gutter="20">
-      <el-col :span="4"><span class="title">星星读书</span></el-col>
+      <el-col :span="4"
+        ><span class="title" @click="$router.push('/index')"
+          >星星读书</span
+        ></el-col
+      >
       <el-col :span="19">
         <el-menu
           :default-active="'1'"
@@ -22,7 +26,7 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import SelfSelect from '@/components/SelfSelect.vue';
+import SelfSelect from '@/components/Common/SelfSelect.vue';
 @Component({
   components: {
     SelfSelect
@@ -41,7 +45,7 @@ export default class selfHeader extends Vue {
 
 <style lang="scss" scoped>
 .header {
-  width: 50%;
+  width: 950px;
   margin: 0 auto;
 }
 .title {

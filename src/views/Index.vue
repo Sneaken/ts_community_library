@@ -13,9 +13,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import SelfHeader from '@/components/SelfHeader.vue';
-import recommendedBooks from '@/components/RecommendedBooks.vue';
-import LeaderBoard from '@/components/LeaderBoard.vue';
+import SelfHeader from '@/components/Common/SelfHeader.vue';
+import recommendedBooks from '@/components/Index/RecommendedBooks.vue';
+import LeaderBoard from '@/components/Index/LeaderBoard.vue';
 
 @Component({
   components: { SelfHeader, recommendedBooks, LeaderBoard }
