@@ -3,6 +3,7 @@
     <self-header></self-header>
     <book-item v-if="info" :info="info"></book-item>
     <book-content
+      class="book-content"
       v-if="info"
       :summary="info.summary.split('\n')"
       :author-intro="info.authorIntro.split('\n')"
@@ -56,5 +57,9 @@ export default class bookInfo extends Vue {
 <style lang="scss" scoped>
 .book-info {
   margin-left: calc(100vw - 100%);
+}
+.book-content {
+  position: relative;
+  top: 5px;
 }
 </style>

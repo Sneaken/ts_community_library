@@ -1,6 +1,8 @@
 <template>
-  <div class="book-item" v-if="info">
-    <h3>{{ info.title }}: {{ info.subtitle }}</h3>
+  <div class="book-item clear-fix" v-if="info">
+    <h3>
+      {{ info.title }} <span v-if="info.subtitle">: {{ info.subtitle }}</span>
+    </h3>
     <div class="book-info">
       <el-image
         :src="imageChange(info['images']['small'])"
@@ -19,16 +21,18 @@
       </div>
       <div class="info">
         <ul>
-          <li>作者: {{ info.author.join(',') }}</li>
-          <li>出版社: {{ info.publisher }}</li>
-          <li>副标题: {{ info.subtitle }}</li>
-          <li>原作名: {{ info.altTitle }}</li>
-          <li>译者: {{ info.translator }}</li>
-          <li>出版年: {{ info.pubDate }}</li>
-          <li>页数: {{ info.pages }}</li>
-          <li>定价: ￥{{ info.price.toFixed(2) }}</li>
-          <li>装帧: {{ info.binding }}</li>
-          <li>ISBN: {{ info.isbn13 }}</li>
+          <li v-if="info.author[0] !== ''">
+            作者: {{ info.author.join(',') }}
+          </li>
+          <li v-if="info.publisher">出版社: {{ info.publisher }}</li>
+          <li v-if="info.subtitle">副标题: {{ info.subtitle }}</li>
+          <li v-if="info.altTitle">原作名: {{ info.altTitle }}</li>
+          <li v-if="info.translator">译者: {{ info.translator }}</li>
+          <li v-if="info.pubDate">出版年: {{ info.pubDate }}</li>
+          <li v-if="info.pages">页数: {{ info.pages }}</li>
+          <li v-if="info.price">定价: ￥{{ info.price.toFixed(2) }}</li>
+          <li v-if="info.binding">装帧: {{ info.binding }}</li>
+          <li v-if="info.isbn13">ISBN: {{ info.isbn13 }}</li>
         </ul>
       </div>
     </div>
@@ -78,5 +82,15 @@ export default class bookItem extends Vue {
   .rate {
     float: right;
   }
+}
+.clear-fix:after {
+  display: block;
+  clear: both;
+  content: '';
+  visibility: hidden;
+  height: 0;
+}
+.clear-fix {
+  zoom: 1;
 }
 </style>
