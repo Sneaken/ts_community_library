@@ -37,38 +37,20 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { GET_INFO } from '@/config';
-import { ResultInterface } from '@/config/common.interface';
-import { AxiosRequestConfig } from 'axios';
 
-@Component
-export default class bookItem extends Vue {
-  info: any = null;
-
-  mounted() {
-    this.getBookInfo();
+@Component({
+  props: {
+    info: {
+      type: Object,
+      default: {}
+    }
   }
-
+})
+export default class bookItem extends Vue {
   get imageChange() {
     return function(val: { replace: (arg0: string, arg1: string) => string }) {
       return val.replace('https://', 'https://images.weserv.nl/?url=');
     };
-  }
-
-  async getBookInfo() {
-    const param: AxiosRequestConfig = {
-      params: {
-        _id: this.$route.params._id
-      }
-    };
-    const result = await this.$axios.get(GET_INFO, param);
-    if (result.status === 200) {
-      this.info = result.data[0];
-      this.info.rating.average =
-        Number.parseFloat(this.info.rating.average) / 2;
-      this.$emit('sendMessage', this.info);
-      console.log(this.info);
-    }
   }
 }
 </script>
