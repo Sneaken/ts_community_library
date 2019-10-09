@@ -26,7 +26,6 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import { findHomeBook } from '@/config';
 
 @Component
 export default class selfSelect extends Vue {
@@ -44,16 +43,23 @@ export default class selfSelect extends Vue {
       label: '出版社'
     }
   ];
-  category = 'title';
-  keywords = '';
+  category: any = 'title';
+  keywords: any = '';
+
+  mounted() {
+    this.category = this.$route.query.category;
+    this.keywords = this.$route.query.keywords;
+  }
   handleSelect() {
-    this.$axios.get(findHomeBook, {
-      params: {
-        category: this.category,
-        keywords: this.keywords
+    if (this.$route.query.keywords !== this.keywords) {
+      if (this.category === '' || typeof this.category === 'undefined') {
+        this.category = 'title';
       }
-    });
-    console.log(this.category, this.keywords);
+      this.$router.push({
+        path: '/bookSearch',
+        query: { category: this.category, keywords: this.keywords }
+      });
+    }
   }
 }
 </script>

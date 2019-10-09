@@ -48,7 +48,7 @@ export default class bookInfo extends Vue {
       this.info = result.data[0];
       this.info.rating.average =
         Number.parseFloat(this.info.rating.average) / 2;
-      console.log(this.info);
+      // console.log(this.info);
     }
   }
 }

@@ -1,9 +1,4 @@
 <template>
-  <!--  <el-container>-->
-  <!--    <el-header><self-header></self-header></el-header>-->
-  <!--    <el-main><recommended-books></recommended-books></el-main>-->
-  <!--    <el-footer>Footer</el-footer>-->
-  <!--  </el-container>-->
   <div>
     <self-header></self-header>
     <recommended-books></recommended-books>

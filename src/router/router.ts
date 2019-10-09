@@ -58,5 +58,18 @@ export default [
     name: 'bookInfo',
     component: () => import('@/views/BookInfo.vue'),
     meta: { title: '图书详情' }
+  },
+  {
+    path: '/bookSearch',
+    name: 'bookSearch',
+    component: () => import('@/views/BookSearch.vue'),
+    meta: { title: '图书搜索列表' }
+    // children: [
+    //   {
+    //     path: '/compensationInquiry',
+    //     name: 'CompensationInquiry',
+    //     component: () => import('@/views/Index.vue')
+    //   }
+    // ]
   }
 ];

@@ -65,7 +65,7 @@ export default class leaderBoard extends Vue {
           .map(item => item.title)
           .join('、');
       });
-      console.log(result.data);
+      // console.log(result.data);
       this.bookList = result.data;
     }
   }
