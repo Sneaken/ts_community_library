@@ -50,7 +50,7 @@
 
 <script lang="ts">
 import { Component, Vue, Watch } from 'vue-property-decorator';
-import dataPagination from '@/components/Common/DataPagination.vue';
+import dataPagination from '@/components/common/DataPagination.vue';
 import { FIND_SIMPLE } from '@/config';
 import { AxiosRequestConfig } from 'axios';
 @Component({

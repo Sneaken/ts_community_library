@@ -14,9 +14,9 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import selfHeader from '@/components/Common/SelfHeader.vue';
-import bookItem from '@/components/BookInfo/BookItem.vue';
-import bookContent from '@/components/BookInfo/BookContent.vue';
+import selfHeader from '@/components/common/SelfHeader.vue';
+import bookItem from '@/components/book-info/BookItem.vue';
+import bookContent from '@/components/book-info/BookContent.vue';
 import { GET_INFO } from '@/config';
 import { AxiosRequestConfig } from 'axios';
 @Component({

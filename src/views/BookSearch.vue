@@ -9,8 +9,8 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import SelfHeader from '@/components/Common/SelfHeader.vue';
-import BookList from '@/components/BookSearch/BookList.vue';
+import SelfHeader from '@/components/common/SelfHeader.vue';
+import BookList from '@/components/book-search/BookList.vue';
 
 @Component({
   components: { SelfHeader, BookList }

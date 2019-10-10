@@ -26,10 +26,10 @@
 
 <script lang="ts">
 import { Component, Vue } from 'vue-property-decorator';
-import SelfSelect from '@/components/Common/SelfSelect.vue';
+import selfSelect from '@/components/common/SelfSelect.vue';
 @Component({
   components: {
-    SelfSelect
+    selfSelect
   }
 })
 export default class selfHeader extends Vue {
@@ -38,6 +38,8 @@ export default class selfHeader extends Vue {
   handleSelect(key: string, keyPath: string[]) {
     if (key === '1') {
       this.showSelect = !this.showSelect;
+    } else if (key === '2') {
+      this.$router.push('/user');
     }
   }
 }

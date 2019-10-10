@@ -71,5 +71,17 @@ export default [
     //     component: () => import('@/views/Index.vue')
     //   }
     // ]
+  },
+  {
+    path: '/user',
+    component: () => import('@/views/User/UserIndex.vue'),
+    meta: { title: '后台管理系统' }
+    // children: [
+    //   {
+    //     path: 'index',
+    //     name: 'userIndex',
+    //     component: () => import('@/components/user-index/HeadNav.vue')
+    //   }
+    // ]
   }
 ];
