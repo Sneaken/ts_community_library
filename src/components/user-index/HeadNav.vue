@@ -12,7 +12,7 @@
             <el-dropdown-item command="info" v-if="user.username"
               >个人信息</el-dropdown-item
             >
-            <el-dropdown-item command="logout">退出</el-dropdown-item>
+            <el-dropdown-item command="logout">安全退出</el-dropdown-item>
           </el-dropdown-menu>
         </el-dropdown>
       </div>
@@ -42,7 +42,7 @@ export default class headNav extends Vue {
     if (this.$store.getters.user.identity) {
       this.$router.push('/staff/infoShow2');
     } else {
-      this.$router.push('/user/infoShow');
+      this.$router.push('/user/accountSetting');
     }
   }
   logout() {

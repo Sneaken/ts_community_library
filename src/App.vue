@@ -9,13 +9,15 @@ import jwt_decode from 'jwt-decode';
 import { Component, Vue } from 'vue-property-decorator';
 import { UserInterface } from './store/state.interface';
 import { isEmpty } from './utils/common';
+import { GET_TOKEN } from '@/config';
+import { ResultInterface } from '@/config/common.interface';
 
 @Component
 export default class App extends Vue {
   // lifecycle hook
 
-  created() {
-    if (localStorage.eleToken) {
+  async created() {
+    if (typeof localStorage.update === 'undefined') {
       const userInfo: UserInterface = jwt_decode(localStorage.eleToken);
       if (new Date() < new Date(userInfo.exp * 1000)) {
         //token存储到vue
@@ -28,6 +30,29 @@ export default class App extends Vue {
         });
         localStorage.removeItem('eleToken');
         this.$router.push('/login');
+      }
+    } else if (localStorage.update === 'true') {
+      try {
+        const decodedOld: UserInterface = jwt_decode(localStorage.eleToken);
+        const params: any = {
+          params: {
+            username: decodedOld.username
+          }
+        };
+        const result: ResultInterface = await this.$axios.get(
+          GET_TOKEN,
+          params
+        );
+        localStorage.setItem('eleToken', result.data as string);
+        //解析token
+        const decoded = jwt_decode(result.data as string);
+
+        //token存储到vuex
+        await this.$store.dispatch('setAuthenticated', !isEmpty(decoded));
+        await this.$store.dispatch('setUser', decoded);
+        localStorage.removeItem('update');
+      } catch (e) {
+        console.log(e);
       }
     }
   }

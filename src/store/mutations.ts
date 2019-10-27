@@ -14,8 +14,25 @@ const mutations = {
     if (user) {
       state.user = user;
     } else {
-      state.user = { component: '', exp: 0, iat: 0, username: '' };
+      state.user = {
+        component: '',
+        exp: 0,
+        iat: 0,
+        username: '',
+        phone: '',
+        email: ''
+      };
     }
+  },
+  [types.UPDATE_USER](
+    state: StateInterface,
+    object: {
+      attribute: string;
+      data: string;
+    }
+  ) {
+    // @ts-ignore
+    state.user[object.attribute] = object.data;
   }
 };
 export default mutations;

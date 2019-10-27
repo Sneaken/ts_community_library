@@ -80,7 +80,6 @@ export default class dataPagination extends Vue {
     this.pageSizeCopy = newVal;
   }
   mounted() {
-    console.log(2);
     this.setPagination();
   }
 }

@@ -75,13 +75,20 @@ export default [
   {
     path: '/user',
     component: () => import('@/views/User/UserIndex.vue'),
-    meta: { title: '后台管理系统' }
-    // children: [
-    //   {
-    //     path: 'index',
-    //     name: 'userIndex',
-    //     component: () => import('@/components/user-index/HeadNav.vue')
-    //   }
-    // ]
+    meta: { title: '后台管理系统' },
+    children: [
+      {
+        path: 'accountSetting',
+        name: 'accountSetting',
+        component: () =>
+          import('@/components/user-index/views/AccountSetting.vue')
+      }
+      // {
+      //   path: 'accountSetting',
+      //   name: 'accountSetting',
+      //   component: () =>
+      //     import('@/components/user-index/views/AccountSetting.vue')
+      // }
+    ]
   }
 ];

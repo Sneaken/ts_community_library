@@ -12,3 +12,7 @@ export const GET_HOME_BOOK: string = '/api/book/getHomeBook';
 export const GET_LEADER_BOARD: string = '/api/book/getLeaderBoard';
 
 export const GET_INFO: string = '/api/book/getInfo';
+
+export const UPDATE_USER_INFO: string = '/api/user/updateUserInfo';
+
+export const GET_TOKEN: string = '/api/user/getToken';

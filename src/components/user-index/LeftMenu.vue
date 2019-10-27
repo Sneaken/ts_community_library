@@ -41,11 +41,6 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class leftMenu extends Vue {
   items = [
     {
-      icon: 'el-icon-location',
-      name: '首页',
-      path: 'home'
-    },
-    {
       icon: 'el-icon-view',
       name: '借阅管理',
       path: 'borrowingManagement',
@@ -67,11 +62,6 @@ export default class leftMenu extends Vue {
         { path: 'compensationInquiry', name: '赔偿查询' },
         { path: 'overdueInquiry', name: '逾期查询' }
       ]
-    },
-    {
-      icon: 'el-icon-edit',
-      name: '修改密码',
-      path: 'changePassword'
     }
   ];
   // mounted() {

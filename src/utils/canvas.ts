@@ -25,12 +25,12 @@ export default function draw(id: string): any {
       window.msRequestAnimationFrame ||
       // tslint:disable-next-line:only-arrow-functions
       function(callback) {
-        window.setTimeout(callback, 1000 / 60);
+        window.setTimeout(callback, 17);
       }
     );
   })();
   // 鼠标活动时，获取鼠标坐标
-  const warea = { x: null, y: null, max: 20000 };
+  const warea = { x: null, y: null, max: 15000 };
   window.onmousemove = (e: any) => {
     e = e || window.event;
     warea.x = e.clientX;

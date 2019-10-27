@@ -22,7 +22,7 @@
           label="密码"
           :rules="[{ required: true, message: '请输入密码', trigger: 'blur' }]"
         >
-          <el-input v-model="loginForm.password"></el-input>
+          <el-input v-model="loginForm.password" show-password></el-input>
         </el-form-item>
         <el-form-item
           prop="verificationCode"
@@ -150,5 +150,8 @@ export default class Login extends Vue {
   display: block;
   width: 100%;
   height: 100%;
+}
+.el-input /deep/ .el-input-group__append {
+  background-color: #eccc68;
 }
 </style>
