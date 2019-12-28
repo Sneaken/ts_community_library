@@ -5,29 +5,26 @@
       background-color="#324057"
       text-color="#fff"
       active-text-color="#409eff"
+      router
     >
       <template v-for="item in items">
-        <router-link :to="item.path">
-          <el-menu-item v-if="!item.children" :index="item.path">
-            <i :class="'fa fa-margin ' + item.icon"></i>
-            <span slot="title">{{ item.name }}</span>
-          </el-menu-item>
-        </router-link>
+        <el-menu-item v-if="!item.children" :index="item.path">
+          <i :class="item.icon" />
+          <span slot="title">{{ item.name }}</span>
+        </el-menu-item>
 
         <el-submenu v-if="item.children" :index="item.path" :key="item.path">
           <template slot="title">
-            <i :class="'fa fa-margin ' + item.icon"></i>
+            <i :class="item.icon" />
             <span slot="title">{{ item.name }}</span>
           </template>
-          <router-link
-            v-for="(citem, cindex) in item.children"
-            :to="citem.path"
-            :key="cindex"
+          <el-menu-item
+            v-for="(cItem, cIndex) in item.children"
+            :index="cItem.path"
+            :key="cItem"
           >
-            <el-menu-item :index="citem.path">
-              <span slot="title">{{ citem.name }}</span>
-            </el-menu-item>
-          </router-link>
+            <span slot="title">{{ cItem.name }}</span>
+          </el-menu-item>
         </el-submenu>
       </template>
     </el-menu>

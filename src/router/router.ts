@@ -30,7 +30,7 @@
  * @param {boolean} keepAlive 是否缓存页面
  * @param {string} title 页面标题
  */
-export default [
+const routes = [
   {
     path: '/',
     redirect: '/index'
@@ -92,3 +92,4 @@ export default [
     ]
   }
 ];
+export default routes;
