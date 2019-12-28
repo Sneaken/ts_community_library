@@ -4,8 +4,7 @@ import router from './router/index';
 import store from './store/index';
 
 import 'normalize.css';
-import ElementUI from 'element-ui';
-import 'element-ui/lib/theme-chalk/index.css';
+import './element-ui';
 import axios from '@/utils/request';
 
 Vue.config.productionTip = false;
@@ -19,8 +18,6 @@ Vue.config.productionTip = false;
 // }
 
 Vue.prototype.$axios = axios;
-
-Vue.use(ElementUI);
 
 new Vue({
   router,

@@ -8,7 +8,7 @@
       router
     >
       <template v-for="item in items">
-        <el-menu-item v-if="!item.children" :index="item.path">
+        <el-menu-item v-if="!item.children" :index="item.path" :key="item.path">
           <i :class="item.icon" />
           <span slot="title">{{ item.name }}</span>
         </el-menu-item>
@@ -19,9 +19,9 @@
             <span slot="title">{{ item.name }}</span>
           </template>
           <el-menu-item
-            v-for="(cItem, cIndex) in item.children"
+            v-for="cItem in item.children"
             :index="cItem.path"
-            :key="cItem"
+            :key="cItem.path"
           >
             <span slot="title">{{ cItem.name }}</span>
           </el-menu-item>

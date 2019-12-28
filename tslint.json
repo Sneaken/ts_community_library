@@ -34,7 +34,7 @@
     "no-implicit-dependencies": false, //不允许在项目的package.json中导入未列为依赖项的模块
     "no-inferred-empty-object-type": false, //不允许在函数和构造函数中使用{}的类型推断
     "no-invalid-template-strings": true, //警告在非模板字符中使用${
-    "no-invalid-this": true, //不允许在非class中使用 this关键字
+    //    "no-invalid-this": true, //不允许在非class中使用 this关键字
     "no-misused-new": true, //禁止定义构造函数或new class
     "no-null-keyword": false, //不允许使用null关键字
     "no-object-literal-type-assertion": false, //禁止object出现在类型断言表达式中

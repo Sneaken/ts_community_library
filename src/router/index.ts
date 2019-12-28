@@ -1,6 +1,13 @@
 import Vue from 'vue';
-import Router from 'vue-router';
+import Router, { RawLocation, Route } from 'vue-router';
 import routes from './router';
+
+const originalPush = Router.prototype.push;
+Router.prototype.push = function push(location: RawLocation): Promise<Route> {
+  return ((originalPush.call(this, location) as unknown) as Promise<
+    Route
+  >).catch((err: any) => err);
+};
 
 Vue.use(Router);
 
