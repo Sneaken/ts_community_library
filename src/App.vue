@@ -18,6 +18,7 @@ export default class App extends Vue {
 
   async created() {
     if (typeof localStorage.update === 'undefined') {
+      if (typeof localStorage.eleToken === 'undefined') return;
       const userInfo: UserInterface = jwt_decode(localStorage.eleToken);
       if (new Date() < new Date(userInfo.exp * 1000)) {
         //token存储到vue
