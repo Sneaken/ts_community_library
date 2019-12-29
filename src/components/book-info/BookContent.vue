@@ -24,6 +24,41 @@
           </template>
         </div>
       </li>
+      <li>
+        <div class="">
+          <el-divider>馆藏</el-divider>
+          <el-table :data="location" style="width: 100%">
+            <el-table-column align="center" label="复本／藏书记录">
+              <el-table-column
+                prop="label"
+                label="条码号"
+                width="180"
+                align="center"
+              >
+              </el-table-column>
+              <el-table-column prop="status" label="状态" align="center">
+                <template slot-scope="{ row }">
+                  {{ status[row.status] }}
+                </template>
+              </el-table-column>
+              <el-table-column prop="location" label="典藏地" align="center">
+              </el-table-column>
+              <el-table-column prop="reservation" label="预约" align="center">
+                <template slot-scope="{ row }">
+                  <el-button
+                    size="mini"
+                    type="text"
+                    @click="handleReserve(row)"
+                    v-if="row.status !== '0'"
+                    >预约</el-button
+                  >
+                  <div v-else align="center">库本,无法预约</div>
+                </template>
+              </el-table-column>
+            </el-table-column>
+          </el-table>
+        </div>
+      </li>
       <li class="authorIntro">
         <div>
           <h2>作者简介 · · · · ·</h2>
@@ -75,36 +110,43 @@
 </template>
 
 <script lang="ts">
-import { Component, Vue } from 'vue-property-decorator';
+import { Component, Prop, Vue } from 'vue-property-decorator';
+import { bookReservation, getLocation } from '@/api/book';
 
-@Component({
-  props: {
-    summary: {
-      type: Array,
-      default: []
-    },
-    authorIntro: {
-      type: Array,
-      default: []
-    },
-    catalog: {
-      type: Array,
-      default: []
-    }
-  }
-})
+@Component
 export default class bookContent extends Vue {
+  @Prop({
+    type: Array,
+    default: []
+  })
+  private summary!: [];
+  @Prop({
+    type: Array,
+    default: []
+  })
+  private authorIntro!: [];
+  @Prop({
+    type: Array,
+    default: []
+  })
+  private catalog!: [];
   showSummary = false;
   showAuthorIntro = false;
   showCatalog = false;
-
   summaryPart = {};
   authorIntroPart = {};
   catalogPart = {};
-  mounted() {
+  location = [];
+  status = ['库本', '在库', '借出'];
+
+  get user(): string {
+    return this.$store.getters.user.phone;
+  }
+  async mounted() {
     this.summaryPart = this.getArrayPart(this.summary);
     this.authorIntroPart = this.getArrayPart(this.authorIntro);
     this.catalogPart = this.getArrayPart(this.catalog);
+    await this.getLocation();
   }
 
   getArrayPart(arr: string[], len = 378) {
@@ -125,6 +167,24 @@ export default class bookContent extends Vue {
       result['data'].push(item);
     });
     return result;
+  }
+
+  async getLocation() {
+    try {
+      this.location = await getLocation(this.$route.params._id);
+    } catch (e) {
+      console.log(e);
+    }
+  }
+
+  async handleReserve(row: ILocation) {
+    if (this.user) {
+      try {
+        await bookReservation(row.label);
+      } catch (e) {
+        console.log(e);
+      }
+    }
   }
 }
 </script>
