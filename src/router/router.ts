@@ -82,6 +82,12 @@ const routes = [
         name: 'accountSetting',
         component: () =>
           import('@/components/user-index/views/AccountSetting.vue')
+      },
+      {
+        path: 'appoint-manage',
+        name: 'appointManage',
+        component: () =>
+          import('@/components/user-index/views/AppointManage.vue')
       }
       // {
       //   path: 'accountSetting',

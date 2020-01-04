@@ -209,3 +209,18 @@ export function isEmpty(value: any) {
     (typeof value === 'string' && value.trim().length === 0)
   );
 }
+// code style about async try catch
+export async function to<T, E = Error>(promise: Promise<T>): Promise<[T, E]> {
+  try {
+    return [await promise, (null as unknown) as E];
+  } catch (e) {
+    return [(null as unknown) as T, e];
+  }
+}
+// example
+// async function () {
+//     const [resultA, errA] = await to(asyncFnA())
+//     if (errA) {
+//         throw new Error(`wrapper error: ${errA.message}`)
+//     }
+// }

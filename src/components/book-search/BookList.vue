@@ -13,7 +13,7 @@
         >
           <div class="clear-fix">
             <el-image
-              :src="imageChange(item['images']['small'])"
+              :src="item['images']['small']"
               :alt="item.title"
             ></el-image>
             <div class="book-about">

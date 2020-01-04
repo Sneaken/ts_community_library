@@ -4,10 +4,7 @@
       {{ info.title }} <span v-if="info.subtitle">: {{ info.subtitle }}</span>
     </h3>
     <div class="book-info">
-      <el-image
-        :src="imageChange(info['images']['small'])"
-        :alt="info.title"
-      ></el-image>
+      <el-image :src="info['images']['small']" :alt="info.title" />
       <div class="rate">
         <p>评分</p>
         <el-rate

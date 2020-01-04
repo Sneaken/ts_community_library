@@ -25,7 +25,7 @@
         </div>
       </li>
       <li>
-        <div class="">
+        <div>
           <el-divider>馆藏</el-divider>
           <el-table :data="location" style="width: 100%">
             <el-table-column align="center" label="复本／藏书记录">
@@ -43,18 +43,45 @@
               </el-table-column>
               <el-table-column prop="location" label="典藏地" align="center">
               </el-table-column>
-              <el-table-column prop="reservation" label="预约" align="center">
+              <el-table-column prop="end_time" label="应还时间" align="center">
+              </el-table-column>
+              <el-table-column label="操作" align="center">
                 <template slot-scope="{ row }">
                   <el-button
                     size="mini"
                     type="text"
                     @click="handleReserve(row)"
                     v-if="row.status !== '0'"
+                    :disabled="row.reservation === '1'"
                     >预约</el-button
                   >
                   <div v-else align="center">库本,无法预约</div>
                 </template>
               </el-table-column>
+            </el-table-column>
+          </el-table>
+        </div>
+      </li>
+      <li>
+        <div>
+          <el-divider>预约信息</el-divider>
+          <el-table
+            :data="booking"
+            style="width: 100%"
+            empty-text="暂无预约信息"
+            header-cell-class-name="tr"
+            border
+          >
+            <el-table-column
+              prop="label"
+              label="条码号"
+              width="180"
+              align="center"
+            />
+            <el-table-column prop="location" label="典藏地" align="center" />
+            <el-table-column prop="start_time" label="预约时间" align="center">
+            </el-table-column>
+            <el-table-column prop="end_time" label="解约时间" align="center">
             </el-table-column>
           </el-table>
         </div>
@@ -111,7 +138,7 @@
 
 <script lang="ts">
 import { Component, Prop, Vue } from 'vue-property-decorator';
-import { bookReservation, getLocation } from '@/api/book';
+import { bookReservation, getBookingInfo, getLocation } from '@/api/book';
 
 @Component
 export default class bookContent extends Vue {
@@ -138,6 +165,7 @@ export default class bookContent extends Vue {
   catalogPart = {};
   location = [];
   status = ['库本', '在库', '借出'];
+  booking = [];
 
   get user(): string {
     return this.$store.getters.user.phone;
@@ -147,6 +175,7 @@ export default class bookContent extends Vue {
     this.authorIntroPart = this.getArrayPart(this.authorIntro);
     this.catalogPart = this.getArrayPart(this.catalog);
     await this.getLocation();
+    await this.getBookingInfo();
   }
 
   getArrayPart(arr: string[], len = 378) {
@@ -176,13 +205,36 @@ export default class bookContent extends Vue {
       console.log(e);
     }
   }
+  async getBookingInfo() {
+    try {
+      this.booking = await getBookingInfo(this.$route.params._id);
+    } catch (e) {
+      console.log(e);
+    }
+  }
 
   async handleReserve(row: ILocation) {
     if (this.user) {
       try {
-        await bookReservation(row.label);
+        await this.$confirm('是否预约该图书?', '提示', {
+          confirmButtonText: '确定',
+          cancelButtonText: '取消',
+          type: 'warning'
+        });
+        const { message } = await bookReservation(row.label, this.user);
+        this.$message.success(message);
+        await this.getBookingInfo();
       } catch (e) {
-        console.log(e);
+        if (typeof e === 'string') {
+          this.$message.info('已取消操作');
+        } else {
+          if (e.message.includes('status')) {
+            this.$message.error(JSON.parse(e.message).message);
+          } else {
+            console.log(e);
+            this.$message.error(e.message);
+          }
+        }
       }
     }
   }
@@ -220,5 +272,8 @@ export default class bookContent extends Vue {
       margin-bottom: 0;
     }
   }
+}
+/deep/ .tr {
+  background-color: #f5f7fa;
 }
 </style>

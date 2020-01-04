@@ -42,24 +42,25 @@ axios.interceptors.response.use(
   },
   async (error: any) => {
     endLoading();
-    Message.error(error.response);
-    // 获取错误状态码
-    const { status } = error.response;
-    if (status === 401) {
-      if (router.currentRoute.path) {
-        Message.warning('登录信息过期，请重新登录！');
-        localStorage.removeItem('eleToken');
-        await router.push('/login');
-        // router.replace({
-        //   name: 'userLogin',
-        //   query: { redirect: router.currentRoute.fullPath }
-        // });
-      } else {
-        Message.error('token失效，请重新登录！');
-        // 清除token
-        localStorage.removeItem('eleToken');
-        // 跳转到登录页面
-        await router.push('/login');
+    if (error.response) {
+      // 获取错误状态码
+      const { status } = error.response;
+      if (status === 401) {
+        if (router.currentRoute.path) {
+          Message.warning('登录信息过期，请重新登录！');
+          localStorage.removeItem('eleToken');
+          await router.push('/login');
+          // router.replace({
+          //   name: 'userLogin',
+          //   query: { redirect: router.currentRoute.fullPath }
+          // });
+        } else {
+          Message.error('token失效，请重新登录！');
+          // 清除token
+          localStorage.removeItem('eleToken');
+          // 跳转到登录页面
+          await router.push('/login');
+        }
       }
     }
     return Promise.reject(error);
