@@ -1,12 +1,6 @@
 <template>
   <div>
-    <el-menu
-      mode="vertical"
-      background-color="#324057"
-      text-color="#fff"
-      active-text-color="#409eff"
-      router
-    >
+    <el-menu mode="vertical" router>
       <template v-for="item in items">
         <el-menu-item v-if="!item.children" :index="item.path" :key="item.path">
           <i :class="item.icon" />
@@ -38,6 +32,11 @@ import { Component, Vue } from 'vue-property-decorator';
 export default class leftMenu extends Vue {
   items = [
     {
+      icon: 'el-icon-star-on',
+      name: '首页',
+      path: '/index'
+    },
+    {
       icon: 'el-icon-view',
       name: '借阅管理',
       path: 'borrowingManagement',
@@ -49,7 +48,7 @@ export default class leftMenu extends Vue {
     {
       icon: 'el-icon-star-on',
       name: '预约管理',
-      path: 'user/bookReservationManagement'
+      path: '/user/appoint-manage'
     },
     {
       icon: 'el-icon-menu',
