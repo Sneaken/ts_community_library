@@ -1,15 +1,9 @@
 <template>
-  <el-container>
-    <el-header class="header-container">
-      <head-nav />
-    </el-header>
-    <el-container>
-      <el-aside class="aside-container" width="201px">
-        <left-menu />
-      </el-aside>
-      <el-main class="main-container">
-        <router-view />
-      </el-main>
+  <el-container class="main-page">
+    <el-header class="header" height="70px"><head-nav /></el-header>
+    <el-container class="content">
+      <el-aside class="left-menu" width="200px"><left-menu /></el-aside>
+      <el-main class="router-view"><router-view /></el-main>
     </el-container>
   </el-container>
 </template>
@@ -25,38 +19,31 @@ export default class userIndex extends Vue {}
 </script>
 
 <style lang="scss" scoped>
-.header-container {
-  position: fixed;
-  top: 0;
-  left: 0;
-  z-index: 10;
-  border-bottom: 10px solid #f1f4fb;
-  width: 100%;
-  height: 70px !important;
-  font-size: 18px;
-  background-color: white;
-}
-.aside-container {
-  overflow-y: hidden;
-  position: fixed;
-  top: 70px;
-  left: 0;
-  z-index: 12;
-  border-right: 10px solid #f1f4fb;
+.main-page {
   height: 100%;
-  background-color: white;
-  box-shadow: 0 2px 15px 0 rgba(73, 73, 73, 0.1);
-  /deep/ .el-menu {
-    border: 0;
-  }
+  min-height: 1000px;
+  background-color: #f1f4fb;
 }
-.main-container {
-  position: absolute;
-  top: 70px;
-  left: 200px;
-  margin: 10px;
-  width: calc(100% - 210px);
-  min-width: 900px;
-  background-color: white;
+
+.header {
+  padding: 0 !important;
+  background-color: #ffffff;
+}
+
+.content {
+  overflow: hidden;
+}
+
+.left-menu {
+  height: 100%;
+  background-color: #40435b;
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+.router-view {
+  margin-top: 10px;
+  margin-left: 10px;
+  background-color: #ffffff;
 }
 </style>

@@ -49,8 +49,6 @@ router.beforeEach((to, from, next) => {
 });
 
 // 跳转之后
-router.afterEach(to => {
-  //
-});
+router.afterEach(to => {});
 
 export default router;

@@ -1,35 +1,3 @@
-// import Vue from 'vue'
-// import Router from 'vue-router'
-// import Home from '../views/Home.vue'
-//
-// Vue.use(Router)
-//
-// export default new Router({
-//   mode: 'history',
-//   base: process.env.BASE_URL,
-//   routes: [
-//     {
-//       path: '/',
-//       name: 'home',
-//       component: Home
-//     },
-//     {
-//       path: '/about',
-//       name: 'about',
-//       // route level code-splitting
-//       // this generates a separate chunk (about.[hash].js) for this route
-//       // which is lazy-loaded when the route is visited.
-//       component: () =>
-//         import(/* webpackChunkName: "about" */ '../views/About.vue')
-//     }
-//   ]
-// })
-/**
- * meta 可配置参数
- * @param {boolean} icon 页面icon
- * @param {boolean} keepAlive 是否缓存页面
- * @param {string} title 页面标题
- */
 const routes = [
   {
     path: '/',
@@ -78,7 +46,7 @@ const routes = [
     meta: { title: '后台管理系统' },
     children: [
       {
-        path: 'accountSetting',
+        path: 'account-setting',
         name: 'accountSetting',
         component: () =>
           import('@/components/user-index/views/AccountSetting.vue')
@@ -88,13 +56,19 @@ const routes = [
         name: 'appointManage',
         component: () =>
           import('@/components/user-index/views/AppointManage.vue')
+      },
+      {
+        path: 'current-borrowing-renewing',
+        name: 'currentBorrowingRenewing',
+        component: () =>
+          import('@/components/user-index/views/CurrentBorrowingRenewing.vue')
+      },
+      {
+        path: 'borrowed-history',
+        name: 'BorrowedHistory',
+        component: () =>
+          import('@/components/user-index/views/BorrowedHistory.vue')
       }
-      // {
-      //   path: 'accountSetting',
-      //   name: 'accountSetting',
-      //   component: () =>
-      //     import('@/components/user-index/views/AccountSetting.vue')
-      // }
     ]
   }
 ];

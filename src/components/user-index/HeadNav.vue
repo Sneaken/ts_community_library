@@ -42,7 +42,7 @@ export default class headNav extends Vue {
     if (this.$store.getters.user.identity) {
       this.$router.push('/staff/infoShow2');
     } else {
-      this.$router.push('/user/accountSetting');
+      this.$router.push('/user/account-setting');
     }
   }
   logout() {
